@@ -1,0 +1,74 @@
+
+# Copyright (c) 2023 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  self:
+    path: ThreadBleSecure-ncs
+
+  remotes:
+    - name: ncs
+      url-base: https://github.com/nrfconnect
+    - name: canis
+      url-base: https://github.com/canisLupus1313
+
+  projects:
+    - name: openthread
+      remote: canis
+      revision: 442f2491efb3a973ef51b56cb48904f2e3eb05df
+      path: modules/lib/openthread
+    - name: sdk-nrf
+      remote: ncs
+      revision: v2.3.0
+      path: nrf
+      import:
+        name-blocklist:
+          - openthread
+          - zephyr
+    - name: zephyr
+      repo-path: sdk-zephyr
+      revision: 9a30ca95bdf405045992ebebe20b5765492bda53
+      remote: canis
+      import:
+        # In addition to the zephyr repository itself, NCS also
+        # imports the contents of zephyr/west.yml at the above
+        # revision. Only the projects explicitly named in the
+        # following allowlist are imported.
+        #
+        # Note that the zephyr west extensions (like 'build', 'flash',
+        # 'debug', etc.) are automatically provided by this import, so
+        # there's no need to add a redundant west-commands: key for
+        # the zephyr project.
+        #
+        # Please keep this list sorted alphabetically.
+        name-allowlist:
+          - TraceRecorderSource
+          - canopennode
+          - chre
+          - cmsis
+          - edtt
+          - fatfs
+          - hal_nordic
+          - hal_st # required for ST sensors (unrelated to STM32 MCUs)
+          - hal_wurthelektronik
+          - liblc3
+          - libmetal
+          - littlefs
+          - loramac-node
+          - lvgl
+          - lz4
+          - mipi-sys-t
+          - nanopb
+          - net-tools
+          - nrf_hw_models
+          - open-amp
+          - picolibc
+          - psa-arch-tests
+          - segger
+          - tinycbor
+          - tinycrypt
+          - tf-m-tests
+          - uoscore-uedhoc
+          - zcbor
+          - zscilib
+

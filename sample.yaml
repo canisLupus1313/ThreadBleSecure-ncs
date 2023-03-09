@@ -1,0 +1,12 @@
+sample:
+  name: BBTC
+  description: Test BBTC build
+tests:
+  sample.openthread.bbtc:
+    build_only: true
+    platform_allow: nrf5340dk_nrf5340_cpuapp nrf52840dk_nrf52840 nrf52840dongle_nrf52840
+    tags: build
+    integration_platforms:
+      - nrf5340dk_nrf5340_cpuapp
+      - nrf52840dk_nrf52840
+      - nrf52840dongle_nrf52840
